@@ -1,0 +1,18 @@
+Age,Cholesterol (mg/dL),Resting BP (mmHg),Risk
+29,180,110,Healthy
+35,190,115,Healthy
+40,200,120,Healthy
+38,195,118,Healthy
+32,185,112,Healthy
+45,210,122,Healthy
+42,205,125,Healthy
+50,220,128,Healthy
+52,240,135,At Risk
+55,250,140,At Risk
+58,260,145,At Risk
+60,270,150,At Risk
+62,280,148,At Risk
+54,245,138,At Risk
+57,255,142,At Risk
+65,290,155,At Risk
+48,235,132,At Risk
