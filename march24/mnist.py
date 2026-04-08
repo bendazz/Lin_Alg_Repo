@@ -7,7 +7,7 @@ import torch.optim as optim
 
 torch.manual_seed(1)
 
-dataset = datasets.MNIST(
+dataset = datasets.CIFAR10(
     root = './data',
     train = True,
     download = True,
@@ -17,7 +17,7 @@ dataset = datasets.MNIST(
     ])
 )
 
-test_dataset = datasets.MNIST(
+test_dataset = datasets.CIFAR10(
     root = './data',
     train = False,
     download = True,
@@ -43,12 +43,22 @@ test_loader = DataLoader(
 
 
 model = nn.Sequential(
+    nn.Conv2d(3, 32, kernel_size=3, padding=1),   # 32x32x32
+    nn.ReLU(),
+    nn.Conv2d(32, 32, kernel_size=3, padding=1),  # 32x32x32
+    nn.ReLU(),
+    nn.MaxPool2d(2),                              # 32x16x16
+    nn.Conv2d(32, 64, kernel_size=3, padding=1),  # 64x16x16
+    nn.ReLU(),
+    nn.Conv2d(64, 64, kernel_size=3, padding=1),  # 64x16x16
+    nn.ReLU(),
+    nn.MaxPool2d(2),                              # 64x8x8
     nn.Flatten(),
-    nn.Linear(784,128),
+    nn.Linear(64*8*8, 128),
     nn.ReLU(),
-    nn.Linear(128,64),
+    nn.Linear(128, 64),
     nn.ReLU(),
-    nn.Linear(64,10)
+    nn.Linear(64, 10)
 )
 
 criterion = nn.CrossEntropyLoss()
@@ -82,7 +92,7 @@ for epoch in range(epochs):
     print(test_correct/test_total)
     print("---------------")
 
-torch.save(model.state_dict(),'model.pth')
+torch.save(model.state_dict(),'cifar.pth')
     
 
 
